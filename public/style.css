@@ -1,0 +1,128 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+	-moz-appearance: textfield;
+}
+
+/* The radio-container */
+.radio-container {
+	width: fit-content;
+	display: block;
+	position: relative;
+	padding-left: 25px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.radio-container input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+
+.radio-container label {
+	width: fit-content;
+}
+
+/* Create a custom checkbox */
+.radio {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translate(0%, -50%);
+	height: 15px;
+	width: 15px;
+	border-radius: 50%;
+	border: 1px solid #4f46e5;
+}
+
+/* Create the radio/indicator (hidden when not checked) */
+.radio:after {
+	content: '';
+	position: absolute;
+	display: none;
+}
+
+/* Show the radio when checked */
+.radio-container input:checked ~ .radio:after {
+	display: block;
+}
+
+/* Style the radio/indicator */
+.radio-container .radio:after {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: #4f46e5;
+}
+
+.qr-code img {
+	height: 150px;
+}
+
+/* Social media icons */
+
+.icons-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.icons-container div {
+	padding-bottom: 45px;
+}
+.icons-container div a {
+	cursor: pointer;
+}
+
+.icons-container div a svg {
+	width: 20px;
+	height: 20px;
+}
+.icons-container div a:hover {
+	color: var(--font-green);
+}
+
+.hidden {
+	display: none;
+}
+
+button.disabled {
+	background-color: gray;
+	pointer-events: none;
+	opacity: 50;
+}
+
+button.disabled:hover {
+	background-color: gray;
+}
+
+/* Custom CSS for absolute positioning */
+.go-to-top {
+	position: fixed;
+	bottom: 4rem;
+	right: 2rem;
+	z-index: 999;
+}
+
+/* Custom CSS for circular button */
+.go-to-top button {
+	width: 3rem;
+	height: 3rem;
+	border-radius: 50%;
+}

@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="https://cdn.jsdelivr.net/npm/firebase@9.0.2/firebase-app-compat.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/firebase@9.0.2/firebase-storage-compat.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/firebase@9.0.2/firebase-database-compat.js"></script>
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="assets/favicons/apple-touch-icon.png" />
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./assets/favicons/favicon-32x32.png" />
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="./assets/favicons/favicon-16x16.png" />
+		<link rel="manifest" href="./assets/favicons/site.webmanifest" />
+		<!-- generated from https://favicon.io/favicon-generator/ -->
+		<link rel="stylesheet" href="./style.css" />
+		<title>Maraluru Premier League</title>
+	</head>
+	<body>
+		<div id="main-page">
+			<div class="bg-indigo-50" id="header">
+				<header>
+					<nav
+						class="bg-indigo-50 border-gray-200 px-4 lg:px-6 py-2.5">
+						<div
+							class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+							<a href="#" class="flex items-center"
+								><span
+									class="text-indigo-600 self-center text-4xl font-semibold whitespace-nowrap"
+									>MPL</span
+								></a
+							>
+							<div class="flex items-center lg:order-2">
+								<!-- <a
+								href="javascript:void(0)"
+								class="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2"
+								>Log in</a
+							><a
+								href="javascript:void(0)"
+								class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2"
+								>Sign up now</a
+							> -->
+								<button
+									type="button"
+									id="mobile-menu-toggle"
+									class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+									aria-controls="mobile-menu"
+									aria-expanded="false">
+									<span class="sr-only">Open main menu</span
+									><svg
+										class="w-6 h-6"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										xmlns="http://www.w3.org/2000/svg">
+										<path
+											fill-rule="evenodd"
+											d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+											clip-rule="evenodd"></path></svg
+									><svg
+										class="hidden w-6 h-6"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										xmlns="http://www.w3.org/2000/svg">
+										<path
+											fill-rule="evenodd"
+											d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+											clip-rule="evenodd"></path>
+									</svg>
+								</button>
+							</div>
+							<div
+								class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+								id="mobile-menu">
+								<ul
+									class="flex flex-col items-center mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+									<li>
+										<a
+											href="javascript:void(0)"
+											class="block py-2 pr-4 pl-3 hover:text-blue-800 text-black rounded lg:bg-transparent lg:p-0"
+											aria-current="page"
+											>About</a
+										>
+									</li>
+									<li>
+										<a
+											href="#features"
+											class="block py-2 pr-4 pl-3 hover:text-blue-800 text-black rounded lg:bg-transparent lg:p-0"
+											aria-current="page"
+											>Auction</a
+										>
+									</li>
+									<li>
+										<a
+											href="#registrationForm"
+											class="block py-2 pr-4 pl-3 hover:text-blue-800 text-black rounded lg:bg-transparent lg:p-0"
+											aria-current="page"
+											>Register</a
+										>
+									</li>
+
+									<li>
+										<a
+											href="javascript:void(0)"
+											class="block py-2 pr-4 pl-3 hover:text-blue-800 text-black rounded lg:bg-transparent lg:p-0"
+											aria-current="page"
+											>Seasons</a
+										>
+									</li>
+									<li>
+										<a
+											href="#contactSection"
+											class="block py-2 pr-4 pl-3 hover:text-blue-800 text-black rounded lg:bg-transparent lg:p-0"
+											aria-current="page"
+											>Contact us</a
+										>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+				</header>
+				<div class="relative isolate px-6 pt-14 lg:px-8">
+					<div
+						class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+						aria-hidden="true"></div>
+					<div class="mx-auto max-w-2xl py-10 sm:py-48 lg:py-10">
+						<div class="text-center">
+							<h1
+								class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+								Welcome to Maraluru Premier League
+							</h1>
+							<h4
+								class="text-indigo-600 text-xl font-semibold mt-5">
+								Season 2
+							</h4>
+							<p class="mt-6 text-lg leading-8 text-gray-600">
+								Join the excitement of competitive cricket
+								matches in our league. Register now to be a part
+								of the action!
+							</p>
+							<div
+								class="mt-10 flex items-center justify-center gap-x-6">
+								<a
+									href="#registrationForm"
+									class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+									>Register now</a
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bg-indigo-600 py-10 sm:py-10" id="features">
+				<div class="mx-auto max-w-7xl px-6 lg:px-8">
+					<div class="mx-auto max-w-2xl lg:text-center">
+						<h2
+							class="text-base font-semibold leading-7 text-indigo-200">
+							Stay Updated
+						</h2>
+						<p
+							class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+							Key Features of our Cricket League Platform
+						</p>
+						<p class="mt-6 text-lg leading-8 text-indigo-200">
+							Explore the exciting features that our cricket
+							league platform has to offer
+						</p>
+					</div>
+					<div
+						class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+						<dl
+							class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-4">
+							<div class="flex flex-col">
+								<dt
+									class="flex items-center gap-x-3 text-base font-semibold leading-7 text-white">
+									Auction
+								</dt>
+								<dd
+									class="mt-4 flex flex-auto flex-col text-base leading-7 text-indigo-200">
+									<p class="flex-auto">
+										Details of auction process, rules and
+										regulation of our auction
+									</p>
+									<p class="mt-6">
+										<a
+											href="javascript:void(0)"
+											class="text-sm font-semibold leading-6 text-white"
+											id="auction-rules-navigate"
+											>Learn more
+											<span aria-hidden="true">→</span></a
+										>
+									</p>
+								</dd>
+							</div>
+							<div class="flex flex-col">
+								<dt
+									class="flex items-center gap-x-3 text-base font-semibold leading-7 text-white">
+									Live Scoring
+								</dt>
+								<dd
+									class="mt-4 flex flex-auto flex-col text-base leading-7 text-indigo-200">
+									<p class="flex-auto">
+										Real-time updates on scores and
+										statistics on Cric Heros App
+									</p>
+									<p class="mt-6">
+										<!-- <a
+										href="javascript:void(0)"
+										class="text-sm font-semibold leading-6 text-white"
+										>Learn more
+										<span aria-hidden="true">→</span></a
+									> -->
+										<a
+											href="javascript:void(0)"
+											class="text-sm font-semibold leading-6 text-white"
+											>Upcoming
+											<span aria-hidden="true">→</span></a
+										>
+									</p>
+								</dd>
+							</div>
+							<div class="flex flex-col">
+								<dt
+									class="flex items-center gap-x-3 text-base font-semibold leading-7 text-white">
+									Player Profiles
+								</dt>
+								<dd
+									class="mt-4 flex flex-auto flex-col text-base leading-7 text-indigo-200">
+									<p class="flex-auto">
+										Detailed profiles of all players
+										participating in the league
+									</p>
+									<p class="mt-6">
+										<!-- <a
+										href="javascript:void(0)"
+										class="text-sm font-semibold leading-6 text-white"
+										>Learn more
+										<span aria-hidden="true">→</span></a
+									> -->
+										<a
+											href="javascript:void(0)"
+											class="text-sm font-semibold leading-6 text-white"
+											>Upcoming
+											<span aria-hidden="true">→</span></a
+										>
+									</p>
+								</dd>
+							</div>
+							<div class="flex flex-col">
+								<dt
+									class="flex items-center gap-x-3 text-base font-semibold leading-7 text-white">
+									Schedule and Fixtures
+								</dt>
+								<dd
+									class="mt-4 flex flex-auto flex-col text-base leading-7 text-indigo-200">
+									<p class="flex-auto">
+										Access to the complete schedule and
+										fixtures of the league matches
+									</p>
+									<p class="mt-6">
+										<!-- <a
+										href="javascript:void(0)"
+										class="text-sm font-semibold leading-6 text-white"
+										>Learn more
+										<span aria-hidden="true">→</span></a
+									> -->
+										<a
+											href="javascript:void(0)"
+											class="text-sm font-semibold leading-6 text-white"
+											>Upcoming
+											<span aria-hidden="true">→</span></a
+										>
+									</p>
+								</dd>
+							</div>
+						</dl>
+					</div>
+				</div>
+			</div>
+			<div class="bg-white py-24 sm:py-32" id="registrationForm">
+				<div class="mx-auto max-w-7xl px-6 lg:px-8">
+					<div class="mx-auto max-w-4xl sm:text-center">
+						<h2
+							class="text-lg font-semibold leading-7 text-indigo-600">
+							Ready to play? Fill out the form below
+						</h2>
+						<p
+							class="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+							Player registartion form
+						</p>
+					</div>
+					<div class="flex">
+						<ol
+							class="mx-auto mt-6 max-w-2xl text-sm leading-8 text-black-600 list-decimal">
+							<span class="font-semibold text-indigo-600"
+								>Instructions:</span
+							>
+							<li>All fields are required.</li>
+							<li>
+								Please scan the QR code in the form to make
+								payments.
+							</li>
+							<li>Attach the screenshot of the payment.</li>
+							<li>Make sure the transaction ID is visible.</li>
+						</ol>
+					</div>
+
+					<div class="mt-20 flow-root">
+						<div
+							class="isolate -mt-16 grid max-w-sm grid-cols-1 gap-y-16 divide-y divide-gray-100 sm:mx-auto lg:-mx-8 lg:mt-0 lg:max-w-none lg:divide-x lg:divide-y-0 xl:-mx-4">
+							<div class="pt-16 lg:px-8 lg:pt-0 xl:px-14">
+								<form class="max-w-lg mx-auto">
+									<div class="mb-4">
+										<label
+											for="name"
+											class="block font-medium mb-1 text-indigo-600"
+											>Name:</label
+										>
+										<input
+											type="text"
+											id="name"
+											name="name"
+											required
+											class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-600" />
+									</div>
+									<div class="mb-4">
+										<label
+											for="age"
+											class="block font-medium mb-1 text-indigo-600"
+											>Age:</label
+										>
+										<input
+											type="number"
+											id="age"
+											name="age"
+											required
+											class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-600" />
+									</div>
+									<div class="mb-4">
+										<label
+											for="dob"
+											class="block font-medium mb-1 text-indigo-600"
+											>DOB:</label
+										>
+										<input
+											type="date"
+											id="dob"
+											name="dob"
+											max="2006-12-31"
+											required
+											class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-600" />
+									</div>
+									<div class="mb-4">
+										<label
+											for="phone"
+											class="block font-medium mb-1 text-indigo-600"
+											>Phone No:</label
+										>
+										<input
+											type="number"
+											id="phone"
+											name="phone"
+											required
+											class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-600" />
+									</div>
+									<div class="mb-4">
+										<label
+											for="photo"
+											class="block font-medium mb-1 text-indigo-600"
+											>Photo:</label
+										>
+										<input
+											type="file"
+											id="photo"
+											name="photo"
+											accept=".jpg, .jpeg, .png"
+											maxlength="5242880"
+											required
+											class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-600" />
+									</div>
+									<div class="mb-4">
+										<label
+											for="tshirtName"
+											class="block font-medium mb-1 text-indigo-600"
+											>Name on T Shirt:</label
+										>
+										<input
+											type="text"
+											id="tshirtName"
+											name="tshirtName"
+											required
+											class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-600" />
+									</div>
+									<div class="mb-4">
+										<label
+											for="tshirtNumber"
+											class="block font-medium mb-1 text-indigo-600"
+											>Number on T Shirt:</label
+										>
+										<input
+											type="number"
+											id="tshirtNumber"
+											name="tshirtNumber"
+											required
+											class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-600" />
+									</div>
+									<div class="mb-4">
+										<span
+											class="block font-medium mb-1 text-indigo-600"
+											>Skills:</span
+										>
+										<label
+											for="batsman"
+											class="radio-container">
+											Batsman
+											<input
+												type="radio"
+												id="batsman"
+												name="skill"
+												value="Batsman"
+												checked
+												class="mr-2" />
+											<span class="radio"></span>
+										</label>
+										<label
+											for="bowler"
+											class="radio-container">
+											Bowler
+											<input
+												type="radio"
+												id="bowler"
+												name="skill"
+												value="Bowler"
+												class="mr-2" />
+											<span class="radio"></span>
+										</label>
+										<label
+											for="all-rounder"
+											class="radio-container">
+											All-rounder
+											<input
+												type="radio"
+												id="all-rounder"
+												name="skill"
+												value="All-rounder"
+												class="mr-2" />
+											<span class="radio"></span>
+										</label>
+										<label
+											for="keeper-batsman"
+											class="radio-container">
+											Keeper-Batsman
+											<input
+												type="radio"
+												id="keeper-batsman"
+												name="skill"
+												value="Keeper-Batsman"
+												class="mr-2" />
+											<span class="radio"></span>
+										</label>
+									</div>
+									<div class="mb-4 qr-code">
+										<label
+											for="tshirtNumber"
+											class="block font-medium mb-1 text-indigo-600"
+											>QR Code:</label
+										>
+										<img
+											src="./assets/images/QRCode.jpg"
+											alt="qr-code" />
+										<span class="font-semibold"
+											>or UPI ID: appumaddy71@ybl</span
+										>
+									</div>
+									<div class="mb-4">
+										<div class="mb-4">
+											<label
+												for="tId"
+												class="block font-medium mb-1 text-indigo-600"
+												>Transaction ID:</label
+											>
+											<input
+												type="text"
+												id="tId"
+												name="tId"
+												required
+												class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-600" />
+										</div>
+										<div class="mb-4">
+											<label
+												for="tPhoto"
+												class="block font-medium mb-1 text-indigo-600"
+												>Transaction Screenshot:</label
+											>
+											<input
+												type="file"
+												id="tPhoto"
+												name="tPhoto"
+												accept=".jpg, .jpeg, .png"
+												maxlength="5242880"
+												required
+												class="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-indigo-600" />
+										</div>
+									</div>
+									<button
+										type="button"
+										id="registerButton"
+										class="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-500 transition duration-200 mt-4">
+										Register
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bg-indigo-600" id="contactSection">
+				<div class="px-6 py-24 sm:px-6 sm:py-12 lg:px-8">
+					<div class="mx-auto max-w-5xl">
+						<h2
+							class="text-3xl font-bold tracking-tight text-white text-center mb-6">
+							Contact Us
+						</h2>
+						<div
+							class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2 mx-auto">
+							<div class="flex justify-center lg:justify-start">
+								<div class="text-center lg:text-left">
+									<dt
+										class="text-base font-semibold leading-7 text-white">
+										Organising team:
+									</dt>
+									<dd
+										class="mt-4 text-base leading-7 text-indigo-200">
+										<p class="flex-auto font-medium">
+											Somashekara Mahadevaiah
+										</p>
+										<p class="mt-2">
+											<span>+91 97393 22112</span>
+										</p>
+									</dd>
+									<dd
+										class="mt-4 text-base leading-7 text-indigo-200">
+										<p class="flex-auto font-medium">
+											Madan Shivaraj
+										</p>
+										<p class="mt-2">
+											<span>+91 80730 25995</span>
+										</p>
+									</dd>
+									<dd
+										class="mt-4 text-base leading-7 text-indigo-200">
+										<p class="font-medium">Krishna</p>
+										<p class="mt-2">
+											<span>+91 97397 94232</span>
+										</p>
+									</dd>
+									<dt
+										class="mt-10 text-base font-semibold leading-7 text-white">
+										Follow us on:
+									</dt>
+									<dd
+										class="mt-5 text-base leading-7 text-indigo-200">
+										<div class="icons-container">
+											<div>
+												<a href="javascript:void(0)">
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														role="img"
+														viewBox="0 0 24 24"
+														fill="currentColor"
+														stroke-width="2"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														class="feather feather-facebook">
+														<title>Facebook</title>
+														<path
+															d="M14.874,11.167 L14.262,14.207 C14.062,15.208 13.100,15.992 12.072,15.992 L10.000,15.992 L10.000,30.000 C10.000,31.104 9.159,32.000 8.049,32.000 L5.030,32.000 C3.920,32.000 3.017,31.102 3.017,29.999 L3.017,15.992 L2.011,15.992 C0.901,15.992 -0.002,15.095 -0.002,13.991 L-0.002,10.990 C-0.002,9.887 0.901,8.989 2.011,8.989 L3.017,8.989 L3.017,6.003 C3.017,2.716 5.693,0.041 8.994,0.013 C9.015,0.012 9.033,0.001 9.055,0.001 L13.081,0.001 C13.636,0.001 14.000,0.448 14.000,1.000 L14.000,6.000 C14.000,6.553 13.636,7.004 13.081,7.004 L10.061,7.004 L10.060,8.989 L13.079,8.989 C13.645,8.989 14.167,9.228 14.509,9.644 C14.852,10.059 14.985,10.615 14.874,11.167 ZM9.092,10.990 C9.078,10.991 9.067,10.998 9.053,10.998 L9.053,10.998 C8.497,10.997 8.046,10.549 8.047,9.997 L8.047,9.990 C8.047,9.990 8.047,9.990 8.047,9.990 C8.047,9.990 8.047,9.990 8.047,9.990 L8.049,6.003 C8.049,5.450 8.499,5.003 9.055,5.003 L12.074,5.003 L12.074,2.002 L9.094,2.002 C9.077,2.002 9.063,2.011 9.045,2.011 C6.831,2.011 5.030,3.802 5.030,6.003 L5.030,10.005 C5.030,10.558 4.579,11.006 4.023,11.006 C3.996,11.006 3.973,10.992 3.946,10.990 L2.011,10.990 L2.011,13.991 L4.023,13.991 C4.579,13.991 5.030,14.439 5.030,14.992 C5.030,15.044 5.008,15.088 5.000,15.138 L5.000,30.000 L8.049,29.999 L8.049,15.002 C8.049,14.998 8.047,14.995 8.047,14.992 C8.047,14.439 8.497,13.991 9.053,13.991 L12.072,13.991 C12.145,13.991 12.275,13.886 12.288,13.816 L12.857,10.990 L9.092,10.990 Z"></path>
+													</svg>
+												</a>
+											</div>
+
+											<div>
+												<a href="javascript:void(0)">
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														role="img"
+														viewBox="0 0 24 24"
+														fill="none"
+														stroke="currentColor"
+														stroke-width="2"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														class="feather feather-instagram">
+														<title>Instagram</title>
+														<rect
+															x="2"
+															y="2"
+															width="20"
+															height="20"
+															rx="5"
+															ry="5"></rect>
+														<path
+															d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+														<line
+															x1="17.5"
+															y1="6.5"
+															x2="17.51"
+															y2="6.5"></line>
+													</svg>
+												</a>
+											</div>
+
+											<div>
+												<a href="javascript:void(0)">
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														role="img"
+														viewBox="0 0 16 16"
+														fill="currentColor"
+														stroke-width="2"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														class="feather feather-whatsapp">
+														<path
+															d="M11.42 9.49c-.19-.09-1.1-.54-1.27-.61s-.29-.09-.42.1-.48.6-.59.73-.21.14-.4 0a5.13 5.13 0 0 1-1.49-.92 5.25 5.25 0 0 1-1-1.29c-.11-.18 0-.28.08-.38s.18-.21.28-.32a1.39 1.39 0 0 0 .18-.31.38.38 0 0 0 0-.33c0-.09-.42-1-.58-1.37s-.3-.32-.41-.32h-.4a.72.72 0 0 0-.5.23 2.1 2.1 0 0 0-.65 1.55A3.59 3.59 0 0 0 5 8.2 8.32 8.32 0 0 0 8.19 11c.44.19.78.3 1.05.39a2.53 2.53 0 0 0 1.17.07 1.93 1.93 0 0 0 1.26-.88 1.67 1.67 0 0 0 .11-.88c-.05-.07-.17-.12-.36-.21z"></path>
+														<path
+															d="M13.29 2.68A7.36 7.36 0 0 0 8 .5a7.44 7.44 0 0 0-6.41 11.15l-1 3.85 3.94-1a7.4 7.4 0 0 0 3.55.9H8a7.44 7.44 0 0 0 5.29-12.72zM8 14.12a6.12 6.12 0 0 1-3.15-.87l-.22-.13-2.34.61.62-2.28-.14-.23a6.18 6.18 0 0 1 9.6-7.65 6.12 6.12 0 0 1 1.81 4.37A6.19 6.19 0 0 1 8 14.12z"></path>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</dd>
+								</div>
+							</div>
+
+							<div
+								class="w-full mx-auto bg-indigo-50 shadow-md rounded-lg overflow-hidden">
+								<div class="px-6 py-4">
+									<div class="mb-4">
+										<label
+											for="name"
+											class="block text-gray-700 text-sm font-bold mb-2 text-left"
+											>Name:</label
+										>
+										<input
+											type="text"
+											id="name"
+											name="name"
+											class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-600" />
+									</div>
+									<div class="mb-4">
+										<label
+											for="email"
+											class="block text-gray-700 text-sm font-bold mb-2 text-left"
+											>Email:</label
+										>
+										<input
+											type="email"
+											id="email"
+											name="email"
+											class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-600" />
+									</div>
+									<div class="mb-4">
+										<label
+											for="message"
+											class="block text-gray-700 text-sm font-bold mb-2 text-left"
+											>Message:</label
+										>
+										<textarea
+											id="message"
+											name="message"
+											rows="4"
+											class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-600"></textarea>
+									</div>
+									<div class="flex justify-end">
+										<button
+											type="buton"
+											class="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-500 transition duration-200 mt-4">
+											Send
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bg-white" id="frequentQuestions">
+				<div
+					class="mx-auto max-w-7xl px-6 py-24 sm:pt-32 lg:px-8 lg:py-30">
+					<div class="lg:grid lg:grid-cols-12 lg:gap-8">
+						<div class="lg:col-span-5">
+							<h2
+								class="text-2xl font-bold leading-10 tracking-tight text-gray-900">
+								Frequently asked questions
+							</h2>
+							<p class="mt-4 text-base leading-7 text-gray-600">
+								Can’t find the answer you’re looking for? Reach
+								out to our<!-- -->
+								<a
+									href="#contactSection"
+									class="font-semibold text-indigo-600 hover:text-indigo-500"
+									>Organisers</a
+								>
+								<!-- -->team.
+							</p>
+						</div>
+						<div class="mt-10 lg:col-span-7 lg:mt-0">
+							<dl class="space-y-10">
+								<div>
+									<dt
+										class="text-base font-semibold leading-7 text-gray-900">
+										How can I register for the cricket
+										league?
+									</dt>
+									<dd
+										class="mt-2 text-base leading-7 text-gray-600">
+										You can register by filling out the<!-- -->
+										<a
+											href="#registrationForm"
+											class="font-semibold text-indigo-600 hover:text-indigo-500"
+											>registration form</a
+										>
+										<!-- -->
+										on our website.
+									</dd>
+								</div>
+								<div>
+									<dt
+										class="text-base font-semibold leading-7 text-gray-900">
+										What is the registration fee for
+										participating in the cricket league?
+									</dt>
+									<dd
+										class="mt-2 text-base leading-7 text-gray-600">
+										The registration fee for the league is
+										100 Rupees.
+									</dd>
+								</div>
+								<div>
+									<dt
+										class="text-base font-semibold leading-7 text-gray-900">
+										How can I become a Icon Player or
+										Franchise owner?
+									</dt>
+									<dd
+										class="mt-2 text-base leading-7 text-gray-600">
+										Our website is limited to player's
+										registartion. You can contact our<!-- -->
+										<a
+											href="#contactSection"
+											class="font-semibold text-indigo-600 hover:text-indigo-500"
+											>Organisers</a
+										>
+										<!-- -->
+										team for more information on this.
+									</dd>
+								</div>
+								<div>
+									<dt
+										class="text-base font-semibold leading-7 text-gray-900">
+										When does the cricket league season
+										start?
+									</dt>
+									<dd
+										class="mt-2 text-base leading-7 text-gray-600">
+										The MPL cricket league season typically
+										starts in the summer.<!-- -->
+										<a
+											href="#features"
+											class="font-semibold text-indigo-600 hover:text-indigo-500"
+											>Schedules and fixtures</a
+										>
+										<!-- -->
+										for the season will be updated in the
+										website.
+									</dd>
+								</div>
+								<div>
+									<dt
+										class="text-base font-semibold leading-7 text-gray-900">
+										Are there any age restrictions for
+										participating in the cricket league?
+									</dt>
+									<dd
+										class="mt-2 text-base leading-7 text-gray-600">
+										Yes, participants must be at least 18
+										years old to participate in the cricket
+										league.
+									</dd>
+								</div>
+							</dl>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Footnotes -->
+			<footer class="body-font bg-indigo-600">
+				<div
+					class="container px-5 py-8 mx-auto flex justify-around items-center sm:flex-row flex-col">
+					<a
+						class="flex title-font font-medium items-center md:justify-start justify-center">
+						<!-- Copyright Icon -->
+						<svg
+							fill="#ffffff"
+							height="16px"
+							width="16px"
+							version="1.1"
+							id="Capa_1"
+							xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink"
+							viewBox="0 0 367.467 367.467"
+							xml:space="preserve">
+							<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+							<g
+								id="SVGRepo_tracerCarrier"
+								stroke-linecap="round"
+								stroke-linejoin="round"></g>
+							<g id="SVGRepo_iconCarrier">
+								<g>
+									<path
+										d="M183.73,0.018C82.427,0.018,0,82.404,0,183.733c0,101.289,82.427,183.716,183.73,183.716 c101.315,0,183.737-82.427,183.737-183.716C367.467,82.404,285.045,0.018,183.73,0.018z M183.73,326.518 c-78.743,0-142.798-64.052-142.798-142.784c0-78.766,64.055-142.817,142.798-142.817c78.752,0,142.807,64.052,142.807,142.817 C326.536,262.466,262.481,326.518,183.73,326.518z"></path>
+									<path
+										d="M244.036,217.014c-11.737,20.141-33.562,32.635-56.956,32.635c-36.329,0-65.921-29.585-65.921-65.915 c0-36.36,29.592-65.955,65.921-65.955c23.395,0,45.219,12.54,56.956,32.641l1.517,2.627h44.28l-2.658-7.129 c-7.705-20.413-21.225-37.769-39.122-50.157c-17.942-12.42-39.017-19.009-60.973-19.009c-58.981,0-106.946,48.006-106.946,106.982 c0,58.98,47.965,106.941,106.946,106.941c21.956,0,43.03-6.567,60.973-19.006c17.897-12.391,31.417-29.741,39.122-50.154 l2.658-7.133h-44.28L244.036,217.014z"></path>
+								</g>
+							</g>
+						</svg>
+						<!-- Copyright Text -->
+						<span class="text-sm text-white ml-2">
+							Copyright, 2024 MPL. All rights reserved.</span
+						>
+					</a>
+					<a
+						class="flex title-font font-medium items-center md:justify-start justify-center mt-2 sm:mt-0">
+						<!-- Pen Icon -->
+						<svg
+							width="16px"
+							height="16px"
+							viewBox="0 0 24 24"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg">
+							<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+							<g
+								id="SVGRepo_tracerCarrier"
+								stroke-linecap="round"
+								stroke-linejoin="round"></g>
+							<g id="SVGRepo_iconCarrier">
+								<path
+									d="M14.8686 4.13134L14.1615 3.42423L14.1615 3.42423L14.8686 4.13134ZM7.81459 7.48152L8.08931 8.44304L7.81459 7.48152ZM5.57564 9.83884L6.55004 10.0637V10.0637L5.57564 9.83884ZM3 21L2.02561 20.7751C1.94808 21.1111 2.04909 21.4633 2.29289 21.7071C2.5367 21.9509 2.8889 22.0519 3.22486 21.9744L3 21ZM14.1611 18.4243L13.9363 17.4499L13.9363 17.4499L14.1611 18.4243ZM16.5185 16.1854L15.5569 15.9107L16.5185 16.1854ZM19.8686 9.13134L20.5757 9.83845V9.83845L19.8686 9.13134ZM19.8686 6.8686L19.1615 7.57571H19.1615L19.8686 6.8686ZM17.1314 4.13134L17.8385 3.42423V3.42423L17.1314 4.13134ZM20.5368 8.30899L19.5858 7.99997L20.5368 8.30899ZM20.5368 7.69095L19.5858 7.99997L20.5368 7.69095ZM15.4404 18.0251L15.9601 18.8794H15.9601L15.4404 18.0251ZM16.0539 17.4424L16.8804 18.0054L16.8804 18.0054L16.0539 17.4424ZM6.55756 7.94607L7.12056 8.77253L7.12056 8.77253L6.55756 7.94607ZM5.97487 8.55957L6.82922 9.07928L6.82922 9.07928L5.97487 8.55957ZM15.691 3.46313L15.382 2.51207L15.691 3.46313ZM16.309 3.46313L16.618 2.51207L16.618 2.51207L16.309 3.46313ZM9.14645 16.2676C9.53697 15.8771 9.53697 15.2439 9.14644 14.8534C8.75591 14.4629 8.12275 14.4629 7.73223 14.8534L9.14645 16.2676ZM10 14.5C10 14.7761 9.77614 15 9.5 15V17C10.8807 17 12 15.8807 12 14.5H10ZM9.5 15C9.22386 15 9 14.7761 9 14.5H7C7 15.8807 8.11929 17 9.5 17V15ZM9 14.5C9 14.2238 9.22386 14 9.5 14V12C8.11929 12 7 13.1193 7 14.5H9ZM9.5 14C9.77614 14 10 14.2238 10 14.5H12C12 13.1193 10.8807 12 9.5 12V14ZM14.1615 3.42423L12.2929 5.29286L13.7071 6.70708L15.5757 4.83845L14.1615 3.42423ZM12.7253 5.03845L7.53987 6.51999L8.08931 8.44304L13.2747 6.96149L12.7253 5.03845ZM4.60125 9.61398L2.02561 20.7751L3.97439 21.2248L6.55004 10.0637L4.60125 9.61398ZM3.22486 21.9744L14.386 19.3987L13.9363 17.4499L2.77514 20.0256L3.22486 21.9744ZM17.48 16.4601L18.9615 11.2747L17.0385 10.7252L15.5569 15.9107L17.48 16.4601ZM18.7071 11.7071L20.5757 9.83845L19.1615 8.42424L17.2929 10.2929L18.7071 11.7071ZM20.5757 6.16149L17.8385 3.42423L16.4243 4.83845L19.1615 7.57571L20.5757 6.16149ZM20.5757 9.83845C20.7621 9.65211 20.9449 9.47038 21.0858 9.30446C21.2342 9.12961 21.3938 8.90772 21.4879 8.618L19.5858 7.99997C19.6057 7.93858 19.6292 7.92986 19.5611 8.01011C19.4854 8.09928 19.3712 8.21456 19.1615 8.42424L20.5757 9.83845ZM19.1615 7.57571C19.3712 7.78538 19.4854 7.90066 19.5611 7.98984C19.6292 8.07008 19.6057 8.06136 19.5858 7.99997L21.4879 7.38194C21.3938 7.09222 21.2342 6.87033 21.0858 6.69548C20.9449 6.52957 20.7621 6.34783 20.5757 6.16149L19.1615 7.57571ZM21.4879 8.618C21.6184 8.21632 21.6184 7.78362 21.4879 7.38194L19.5858 7.99997V7.99997L21.4879 8.618ZM14.386 19.3987C14.988 19.2598 15.5141 19.1507 15.9601 18.8794L14.9207 17.1708C14.8157 17.2346 14.6727 17.28 13.9363 17.4499L14.386 19.3987ZM15.5569 15.9107C15.3493 16.6373 15.2966 16.7778 15.2274 16.8794L16.8804 18.0054C17.1743 17.574 17.3103 17.0541 17.48 16.4601L15.5569 15.9107ZM15.9601 18.8794C16.3257 18.6571 16.6395 18.359 16.8804 18.0054L15.2274 16.8794C15.1471 16.9973 15.0426 17.0966 14.9207 17.1708L15.9601 18.8794ZM7.53987 6.51999C6.94585 6.68971 6.426 6.82571 5.99457 7.11961L7.12056 8.77253C7.22213 8.70334 7.36263 8.65066 8.08931 8.44304L7.53987 6.51999ZM6.55004 10.0637C6.71998 9.32729 6.76535 9.18427 6.82922 9.07928L5.12053 8.03986C4.84922 8.48586 4.74017 9.01202 4.60125 9.61398L6.55004 10.0637ZM5.99457 7.11961C5.64092 7.36052 5.34291 7.67429 5.12053 8.03986L6.82922 9.07928C6.90334 8.95742 7.00268 8.85283 7.12056 8.77253L5.99457 7.11961ZM15.5757 4.83845C15.7854 4.62878 15.9007 4.51459 15.9899 4.43889C16.0701 4.37076 16.0614 4.39424 16 4.41418L15.382 2.51207C15.0922 2.60621 14.8704 2.76578 14.6955 2.91421C14.5296 3.05506 14.3479 3.2379 14.1615 3.42423L15.5757 4.83845ZM17.8385 3.42423C17.6521 3.23789 17.4704 3.05506 17.3045 2.91421C17.1296 2.76578 16.9078 2.60621 16.618 2.51207L16 4.41418C15.9386 4.39424 15.9299 4.37077 16.0101 4.43889C16.0993 4.51459 16.2146 4.62877 16.4243 4.83845L17.8385 3.42423ZM16 4.41418H16L16.618 2.51207C16.2163 2.38156 15.7837 2.38156 15.382 2.51207L16 4.41418ZM12.2929 6.70708L17.2929 11.7071L18.7071 10.2929L13.7071 5.29286L12.2929 6.70708ZM7.73223 14.8534L2.29289 20.2929L3.70711 21.7071L9.14645 16.2676L7.73223 14.8534Z"
+									fill="#ffffff"></path>
+							</g>
+						</svg>
+						<!-- creater Text -->
+						<span class="text-sm text-white ml-2">
+							Created by: Madan Shivaraj</span
+						>
+					</a>
+				</div>
+			</footer>
+			<!-- Modal backdrop -->
+			<div
+				class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex justify-center items-center modal hidden">
+				<!-- Modal container -->
+				<div class="bg-white max-w-md rounded-lg p-8 shadow-lg">
+					<!-- Modal content -->
+					<div class="text-center">
+						<!-- Message -->
+						<p class="text-lg font-bold mb-4 modal-header"></p>
+						<p class="text-sm mb-4 font-semibold modal-content"></p>
+						<p class="text-sm mb-4 modal-subcontent"></p>
+						<button
+							class="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-500 transition duration-200 mt-4 modal-close">
+							Close
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="go-to-top">
+				<button>
+					<!-- Up Arrow Icon -->
+					<svg
+						fill="#4f46e5"
+						viewBox="0 0 24 24"
+						id="up-arrow-circle"
+						data-name="Flat Color"
+						xmlns="http://www.w3.org/2000/svg"
+						class="icon flat-color">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g
+							id="SVGRepo_tracerCarrier"
+							stroke-linecap="round"
+							stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier">
+							<circle
+								id="primary"
+								cx="12"
+								cy="12"
+								r="10"
+								style="fill: #4f46e5"></circle>
+							<path
+								id="secondary"
+								d="M14.83,9.5,12.69,6.38a.82.82,0,0,0-1.38,0L9.17,9.5A1,1,0,0,0,9.86,11H11v6a1,1,0,0,0,2,0V11h1.14A1,1,0,0,0,14.83,9.5Z"
+								style="fill: #ffffff"></path>
+						</g>
+					</svg>
+				</button>
+			</div>
+		</div>
+
+		<!-- Auction page -->
+		<div id="auction-page" class="hidden">
+			<div
+				class="bg-indigo-600 text-white px-5 py-5 mx-auto flex items-center">
+				<button id="back-to-main-page-btn">
+					<svg
+						width="32px"
+						height="32px"
+						viewBox="0 0 24 24"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg">
+						<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+						<g
+							id="SVGRepo_tracerCarrier"
+							stroke-linecap="round"
+							stroke-linejoin="round"></g>
+						<g id="SVGRepo_iconCarrier">
+							<path
+								d="M5 12H19M5 12L11 6M5 12L11 18"
+								stroke="#ffffff"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"></path>
+						</g>
+					</svg>
+				</button>
+				<p class="ml-5 font-bold">Auction</p>
+			</div>
+			<div class="flex flex-wrap justify-center">
+				<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+					<div class="bg-white rounded-lg shadow-md p-6 h-full">
+						<h2 class="text-lg font-bold mb-4 text-indigo-600">
+							Rule 1
+						</h2>
+						<p class="text-gray-600 font-semibold text-base">
+							A player who has played in one team is not allowed
+							to play in another team.
+						</p>
+					</div>
+				</div>
+				<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+					<div class="bg-white rounded-lg shadow-md p-6 h-full">
+						<h2 class="text-lg font-bold mb-4 text-indigo-600">
+							Rule 2
+						</h2>
+						<p class="text-gray-600 font-semibold text-base">
+							This tournament would be played with Wilson 4 Tennis
+							ball.
+						</p>
+					</div>
+				</div>
+				<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+					<div class="bg-white rounded-lg shadow-md p-6 h-full">
+						<h2 class="text-lg font-bold mb-4 text-indigo-600">
+							Rule 3
+						</h2>
+						<p class="text-gray-600 font-semibold text-base">
+							Each Match would start with a new ball. (In case of
+							ball damage/loss old ball will be provided.)
+						</p>
+					</div>
+				</div>
+				<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+					<div class="bg-white rounded-lg shadow-md p-6 h-full">
+						<h2 class="text-lg font-bold mb-4 text-indigo-600">
+							Rule 4
+						</h2>
+						<p class="text-gray-600 font-semibold text-base">
+							League matches would be of 6 overs ( 2,2,1,1) (In
+							case of time shortage overs will be reduced
+							accordingly.)
+						</p>
+					</div>
+				</div>
+				<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+					<div class="bg-white rounded-lg shadow-md p-6 h-full">
+						<h2 class="text-lg font-bold mb-4 text-indigo-600">
+							Rule 5
+						</h2>
+						<p class="text-gray-600 font-semibold text-base">
+							QF, SF and Final will be of 7 overs (3,2,1,1) (In
+							case of time shortage overs will be reduced
+							accordingly.)
+						</p>
+					</div>
+				</div>
+				<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+					<div class="bg-white rounded-lg shadow-md p-6 h-full">
+						<h2 class="text-lg font-bold mb-4 text-indigo-600">
+							Rule 6
+						</h2>
+						<p class="text-gray-600 font-semibold text-base">
+							LBW and Leg byes are not applicable for this
+							tournament. Batsman cannot be ruled out in any form
+							for leg byes and no run would be counted.
+						</p>
+					</div>
+				</div>
+				<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+					<div class="bg-white rounded-lg shadow-md p-6 h-full">
+						<h2 class="text-lg font-bold mb-4 text-indigo-600">
+							Rule 7
+						</h2>
+						<p class="text-gray-600 font-semibold text-base">
+							One bouncer is allowed per over, provided the ball
+							passes between the shoulder and the head. If the
+							ball passes over the head, it will be declared as a
+							wide.
+						</p>
+					</div>
+				</div>
+				<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+					<div class="bg-white rounded-lg shadow-md p-6 h-full">
+						<h2 class="text-lg font-bold mb-4 text-indigo-600">
+							Rule 8
+						</h2>
+						<p class="text-gray-600 font-semibold text-base">
+							Free hit is allowed only for crease No ball.
+						</p>
+					</div>
+				</div>
+				<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+					<div class="bg-white rounded-lg shadow-md p-6 h-full">
+						<h2 class="text-lg font-bold mb-4 text-indigo-600">
+							Rule 9
+						</h2>
+						<p class="text-gray-600 font-semibold text-base">
+							Round arm throw Bowling is allowed.
+						</p>
+					</div>
+				</div>
+				<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+					<div class="bg-white rounded-lg shadow-md p-6 h-full">
+						<h2 class="text-lg font-bold mb-4 text-indigo-600">
+							Rule 10
+						</h2>
+						<p class="text-gray-600 font-semibold text-base">
+							On-field umpire’s decision would be the final one.
+						</p>
+					</div>
+				</div>
+				<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+					<div class="bg-white rounded-lg shadow-md p-6 h-full">
+						<h2 class="text-lg font-bold mb-4 text-indigo-600">
+							Rule 11
+						</h2>
+						<p class="text-gray-600 font-semibold text-base">
+							In case of draw, points will be divided in league
+							matches.
+						</p>
+					</div>
+				</div>
+				<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 p-4">
+					<div class="bg-white rounded-lg shadow-md p-6 h-full">
+						<h2 class="text-lg font-bold mb-4 text-indigo-600">
+							Rule 12
+						</h2>
+						<p class="text-gray-600 font-semibold text-base">
+							In case of draw, super over will be played in
+							qualifier round. Chasing team will bat first. (In
+							case of super over draw bowl out will be played.)
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="./app.js" type="module"></script>
+	</body>
+</html>
