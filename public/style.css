@@ -10,6 +10,12 @@ input[type='number'] {
 	-moz-appearance: textfield;
 }
 
+/* Logo */
+
+.logo {
+	width: 64px;
+	height: 64px;
+}
 /* The radio-container */
 .radio-container {
 	width: fit-content;
