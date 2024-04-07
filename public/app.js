@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	const rulesPageNavigatorBtn = document.getElementById(
 		'auction-rules-navigate'
 	);
+	const spinner = document.querySelector('.spinner');
+	const registerText = document.getElementById('registerText');
 
 	// Attach event listeners
 	dobInput.addEventListener('blur', handleDobBlur);
@@ -52,9 +54,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		{ label: 'photo', selector: 'photo', type: 'file' },
 		{ label: 'tshirtName', selector: 'tshirtName', type: 'input' },
 		{ label: 'tshirtNumber', selector: 'tshirtNumber', type: 'input' },
+		{ label: 'tshirtSize', selector: 'tshirtSize', type: 'select' },
 		{
 			label: 'skills',
-			selector: 'input[name="skill"]:checked',
+			selector: 'input[name="skill"]',
 			type: 'radio',
 		},
 		{ label: 'tId', selector: 'tId', type: 'input' },
@@ -69,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function fetchFirebaseConfig() {
-		// TODO: Get firebase config here before proceeding
+		//TODO: get the firebase config here
 		app = firebase.initializeApp(firebaseConfig);
 		storage = firebase.storage();
 		database = firebase.database(app);
@@ -77,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	function fetchFormElements() {
 		for (let field of formFields) {
-			if (field.type === 'input' || field.type === 'file') {
+			if (field.type !== 'radio') {
 				formElements.push({
 					...field,
 					element: document.getElementById(field.selector),
@@ -85,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			} else if (field.type === 'radio') {
 				formElements.push({
 					...field,
-					element: document.querySelector(field.selector),
+					element: document.querySelectorAll(field.selector),
 				});
 			}
 		}
@@ -93,38 +96,72 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	// Function to validate and fetch form data
 	async function validateAndFetchData() {
+		let message = 'Please fill in all fields';
+		let emptyValuesError = false;
+		let phoneLengthError = false;
 		registerBtn.disabled = true;
 		registerBtn.classList.add('disabled');
+		registerText.classList.add('hidden');
+		spinner.classList.remove('hidden');
 		let isFormValid = true;
 		resetFormValidity();
 		formElements.forEach((item) => {
-			if (item.type === 'input' || item.type === 'radio') {
-				if (!item.element.value) {
-					isFormValid = false;
-					setValidity(item.element, true);
-				} else {
-					item.inputValue = item.element.value;
-					formData[item.label] = item.inputValue;
-				}
+			if (item.type === 'radio') {
+				item.element.forEach((element) => {
+					if (element.checked) {
+						item.inputValue = element.value;
+						formData[item.label] = item.inputValue;
+					}
+				});
 			} else if (item.type === 'file') {
 				if (!item.element.files[0]) {
 					isFormValid = false;
 					setValidity(item.element, true);
+					emptyValuesError = true;
 				} else {
 					item.inputValue = item.element.files[0];
+					formData[item.label] = item.inputValue;
+				}
+			} else {
+				if (!item.element.value) {
+					isFormValid = false;
+					setValidity(item.element, true);
+					emptyValuesError = true;
+				} else if (
+					item.label === 'phone' &&
+					item.element.value.length !== 10
+				) {
+					isFormValid = false;
+					setValidity(item.element, true);
+					phoneLengthError = true;
+				} else {
+					item.inputValue = item.element.value;
 					formData[item.label] = item.inputValue;
 				}
 			}
 		});
 
 		if (!isFormValid) {
-			alert('Please fill in all fields and select an option for skills.');
+			if (emptyValuesError && phoneLengthError) {
+				message += ' and please enter 10 digit phone number.';
+			} else if (phoneLengthError) {
+				message = 'Please enter 10 digit phone number.';
+			}
+			handleInvalidForm(message);
 			return;
 		}
 		formData.registrationId = generateRegistrationId();
 		await uploadPhotos();
 		console.log(formData);
 		await postDataToFireBase();
+	}
+
+	function handleInvalidForm(message) {
+		alert(message);
+		registerBtn.disabled = false;
+		registerBtn.classList.remove('disabled');
+		registerText.classList.remove('hidden');
+		spinner.classList.add('hidden');
 	}
 
 	function uploadPhotos() {
@@ -182,6 +219,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 		registerBtn.disabled = false;
 		registerBtn.classList.remove('disabled');
+		registerText.classList.remove('hidden');
+		spinner.classList.add('hidden');
 	}
 
 	function handleSuccess() {
@@ -222,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	function resetFormValidity() {
 		formElements.forEach((item) => {
-			setValidity(item.element, false);
+			if (item.type !== 'radio') setValidity(item.element, false);
 		});
 	}
 
