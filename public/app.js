@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const ageInput = document.getElementById('age');
 	const phoneInput = document.getElementById('phone');
 	const tShirtNumInput = document.getElementById('tshirtNumber');
+	const dobInput = document.getElementById('dob');
 	const registerBtn = document.getElementById('registerButton');
 	const modal = document.querySelector('.modal');
 	const modalHeader = document.querySelector('.modal-header');
@@ -22,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	);
 
 	// Attach event listeners
-
+	dobInput.addEventListener('blur', handleDobBlur);
 	registerBtn.addEventListener('click', validateAndFetchData);
 	modalClosebtn.addEventListener('click', handleModalClose);
 	mobileMenuToggle.addEventListener('click', handleMenuToggle);
@@ -68,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function fetchFirebaseConfig() {
-		// TODO: get firebase config here from firebase project settings
+		// TODO: Get firebase config here before proceeding
 		app = firebase.initializeApp(firebaseConfig);
 		storage = firebase.storage();
 		database = firebase.database(app);
@@ -258,6 +259,38 @@ document.addEventListener('DOMContentLoaded', function () {
 	function handleRulesPageNavigatorBtnClick() {
 		mainPage.classList.add('hidden');
 		rulesPage.classList.remove('hidden');
+	}
+
+	function handleDobBlur(event) {
+		const { value: dob } = event.target;
+		if (dob) {
+			const age = calculateAge(dob);
+			ageInput.value = age;
+		}
+	}
+
+	function calculateAge(birthDateString) {
+		// Create a Date object from the birth date string
+		const birthDate = new Date(birthDateString);
+
+		// Get the current date
+		const currentDate = new Date();
+
+		// Calculate the difference in years between the current date and the birth date
+		let age = currentDate.getFullYear() - birthDate.getFullYear();
+
+		// Adjust for the difference in months and days
+		const currentMonth = currentDate.getMonth() + 1; // January is 0
+		const birthMonth = birthDate.getMonth() + 1;
+		if (
+			currentMonth < birthMonth ||
+			(currentMonth === birthMonth &&
+				currentDate.getDate() < birthDate.getDate())
+		) {
+			age--; // Subtract 1 year if current month and day are before birth month and day
+		}
+
+		return age;
 	}
 
 	function goToTop() {

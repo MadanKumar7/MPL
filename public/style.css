@@ -16,6 +16,7 @@ input[type='number'] {
 	width: 2.5rem;
 	height: 2.5rem;
 }
+
 /* The radio-container */
 .radio-container {
 	width: fit-content;
@@ -52,7 +53,7 @@ input[type='number'] {
 	height: 15px;
 	width: 15px;
 	border-radius: 50%;
-	border: 1px solid #4f46e5;
+	border: 1px solid #ca8a04;
 }
 
 /* Create the radio/indicator (hidden when not checked) */
@@ -75,7 +76,7 @@ input[type='number'] {
 	width: 10px;
 	height: 10px;
 	border-radius: 50%;
-	background-color: #4f46e5;
+	background-color: #ca8a04;
 }
 
 .qr-code img {
